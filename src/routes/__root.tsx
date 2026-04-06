@@ -1,28 +1,21 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
-import '../styles.css'
+import "../styles.css";
 
 export const Route = createRootRoute({
-  component: RootComponent,
-})
+	component: RootComponent,
+});
 
 function RootComponent() {
-  return (
-    <>
-      <Outlet />
-      <TanStackDevtools
-        config={{
-          position: 'bottom-right',
-        }}
-        plugins={[
-          {
-            name: 'TanStack Router',
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-        ]}
-      />
-    </>
-  )
+	return (
+		<div className="grain geo-grid flex min-h-screen flex-col">
+			<Header />
+			<main className="flex-1">
+				<Outlet />
+			</main>
+			<Footer />
+		</div>
+	);
 }
