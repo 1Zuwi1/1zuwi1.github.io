@@ -3,7 +3,12 @@ import { Award, BadgeCheck, ExternalLink, Star } from "lucide-react";
 import SectionHeading from "#/components/SectionHeading";
 import { Badge } from "#/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
-import { type AchievementItem, achievements } from "#/data/portfolio";
+import {
+	type AchievementItem,
+	achievements,
+	pickLocale,
+} from "#/data/portfolio";
+import { useLanguage } from "#/i18n/context";
 
 export const Route = createFileRoute("/achievements")({
 	component: AchievementsPage,
@@ -12,25 +17,23 @@ export const Route = createFileRoute("/achievements")({
 const typeConfig = {
 	certification: {
 		icon: BadgeCheck,
-		label: "Certification",
 		color: "text-emerald-500 dark:text-emerald-400",
 		bg: "bg-emerald-500/10",
 	},
 	award: {
 		icon: Award,
-		label: "Award",
 		color: "text-warm",
 		bg: "bg-warm/10",
 	},
 	accomplishment: {
 		icon: Star,
-		label: "Accomplishment",
 		color: "text-blue-500 dark:text-blue-400",
 		bg: "bg-blue-500/10",
 	},
 } as const;
 
 function AchievementsPage() {
+	const { t } = useLanguage();
 	const certifications = achievements.filter((a) => a.type === "certification");
 	const awards = achievements.filter((a) => a.type === "award");
 	const accomplishments = achievements.filter(
@@ -41,23 +44,32 @@ function AchievementsPage() {
 		<div className="px-6 py-24">
 			<div className="mx-auto max-w-6xl">
 				<SectionHeading
-					label="Achievements"
-					title="Milestones & recognition"
-					description="Certifications, awards, and notable accomplishments throughout my career."
+					label={t.achievementsPage.label}
+					title={t.achievementsPage.title}
+					description={t.achievementsPage.description}
 				/>
 
 				{/* Stats */}
 				<div className="mb-16 grid grid-cols-3 gap-4">
-					<StatCard number={certifications.length} label="Certifications" />
-					<StatCard number={awards.length} label="Awards" />
-					<StatCard number={accomplishments.length} label="Accomplishments" />
+					<StatCard
+						number={certifications.length}
+						label={t.achievementsPage.stats.certifications}
+					/>
+					<StatCard
+						number={awards.length}
+						label={t.achievementsPage.stats.awards}
+					/>
+					<StatCard
+						number={accomplishments.length}
+						label={t.achievementsPage.stats.accomplishments}
+					/>
 				</div>
 
 				{/* All achievements */}
 				<div className="stagger-children grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{achievements.map((achievement) => (
 						<AchievementCard
-							key={achievement.title}
+							key={achievement.title.en}
 							achievement={achievement}
 						/>
 					))}
@@ -77,6 +89,7 @@ function StatCard({ number, label }: { number: number; label: string }) {
 }
 
 function AchievementCard({ achievement }: { achievement: AchievementItem }) {
+	const { language, t } = useLanguage();
 	const config = typeConfig[achievement.type];
 	const Icon = config.icon;
 
@@ -92,13 +105,13 @@ function AchievementCard({ achievement }: { achievement: AchievementItem }) {
 					</Badge>
 				</div>
 				<CardTitle className="mt-3 font-heading text-base font-bold leading-snug">
-					{achievement.title}
+					{pickLocale(achievement.title, language)}
 				</CardTitle>
 				<p className="font-mono text-xs text-warm">{achievement.issuer}</p>
 			</CardHeader>
 			<CardContent>
 				<p className="text-sm leading-relaxed text-muted-foreground">
-					{achievement.description}
+					{pickLocale(achievement.description, language)}
 				</p>
 				{achievement.url && (
 					<a
@@ -108,7 +121,7 @@ function AchievementCard({ achievement }: { achievement: AchievementItem }) {
 						className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs text-warm transition-colors hover:text-warm/80"
 					>
 						<ExternalLink size={12} />
-						View credential
+						{t.achievementsPage.viewCredential}
 					</a>
 				)}
 			</CardContent>

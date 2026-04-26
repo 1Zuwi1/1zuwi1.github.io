@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { personalInfo } from "#/data/portfolio.ts";
+import { useLanguage } from "#/i18n/context";
 
 const socials: { icon: ReactNode; href: string; label: string }[] = [
 	{
@@ -30,6 +31,7 @@ const socials: { icon: ReactNode; href: string; label: string }[] = [
 
 export default function Footer() {
 	const year = new Date().getFullYear();
+	const { t } = useLanguage();
 
 	return (
 		<footer className="border-t border-border/60 px-6 py-12">
@@ -50,10 +52,10 @@ export default function Footer() {
 				</div>
 				<div className="flex flex-col items-center gap-1 text-center">
 					<p className="font-mono text-xs text-muted-foreground">
-						&copy; {year} {personalInfo.fullName}. All rights reserved.
+						&copy; {year} {personalInfo.fullName}. {t.footer.copyright}
 					</p>
 					<p className="font-mono text-xs text-muted-foreground/60">
-						Designed & built with care
+						{t.footer.tagline}
 					</p>
 				</div>
 			</div>

@@ -1,4 +1,7 @@
 import { Code, ExternalLink } from "lucide-react";
+import type { LocalizedProjectData } from "#/data/portfolio";
+import { pickLocale } from "#/data/portfolio";
+import { useLanguage } from "#/i18n/context";
 import { Badge } from "./ui/badge";
 import {
 	Card,
@@ -33,10 +36,18 @@ export interface ProjectData {
 }
 
 interface ProjectCardProps {
-	project: ProjectData;
+	project: LocalizedProjectData;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+	const { language, t } = useLanguage();
+	const subtitle = project.subtitle
+		? pickLocale(project.subtitle, language)
+		: undefined;
+	const achievements = project.achievements
+		? pickLocale(project.achievements, language)
+		: undefined;
+
 	return (
 		<Card className="group/project border border-border/60 bg-card/80 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-warm/20 hover:shadow-lg">
 			{/* Image */}
@@ -49,7 +60,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 					/>
 					{project.featured && (
 						<div className="absolute top-3 right-3">
-							<Badge className="bg-warm text-warm-foreground">Featured</Badge>
+							<Badge className="bg-warm text-warm-foreground">
+								{t.projectCard.featured}
+							</Badge>
 						</div>
 					)}
 				</div>
@@ -61,30 +74,34 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 						<CardTitle className="font-heading text-lg font-bold">
 							{project.title}
 						</CardTitle>
-						<h2>
-							<CardDescription className="font-mono text-xs text-muted-foreground">
-								{project.subtitle}
-							</CardDescription>
-						</h2>
+						{subtitle && (
+							<h2>
+								<CardDescription className="font-mono text-xs text-muted-foreground">
+									{subtitle}
+								</CardDescription>
+							</h2>
+						)}
 						<CardDescription className="mt-1 font-mono text-xs text-warm">
-							{project.role}
+							{pickLocale(project.role, language)}
 						</CardDescription>
 					</div>
 					{!project.image && project.featured && (
-						<Badge className="bg-warm text-warm-foreground">Featured</Badge>
+						<Badge className="bg-warm text-warm-foreground">
+							{t.projectCard.featured}
+						</Badge>
 					)}
 				</div>
 			</CardHeader>
 
 			<CardContent className="space-y-4">
 				<p className="text-sm leading-relaxed text-muted-foreground">
-					{project.description}
+					{pickLocale(project.description, language)}
 				</p>
 
 				{/* Achievements */}
-				{project.achievements && project.achievements.length > 0 && (
+				{achievements && achievements.length > 0 && (
 					<ul className="space-y-1.5">
-						{project.achievements.map((achievement) => (
+						{achievements.map((achievement) => (
 							<li
 								key={achievement}
 								className="flex items-start gap-2 text-sm text-muted-foreground"
@@ -117,7 +134,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 							className="inline-flex items-center gap-1.5 rounded-full bg-warm px-4 py-1.5 font-mono text-xs font-medium text-warm-foreground transition-all hover:opacity-90"
 						>
 							<ExternalLink size={13} />
-							Live Demo
+							{t.projectCard.liveDemo}
 						</a>
 					)}
 					{project.repoUrl && (
@@ -128,7 +145,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 							className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-1.5 font-mono text-xs font-medium text-muted-foreground transition-all hover:border-warm/30 hover:text-foreground"
 						>
 							<Code size={13} />
-							Source
+							{t.projectCard.source}
 						</a>
 					)}
 				</CardFooter>
