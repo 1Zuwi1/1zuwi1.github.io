@@ -1,16 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "#/i18n/context";
+import LanguageToggle from "./LanguageToggle";
 import ThemeToggle from "./ThemeToggle";
-
-const navLinks = [
-	{ to: "/", label: "Home" },
-	{ to: "/projects", label: "Projects" },
-	{ to: "/achievements", label: "Achievements" },
-] as const;
 
 export default function Header() {
 	const [mobileOpen, setMobileOpen] = useState(false);
+	const { t } = useLanguage();
+
+	const navLinks = [
+		{ to: "/", label: t.nav.home },
+		{ to: "/projects", label: t.nav.projects },
+		{ to: "/achievements", label: t.nav.achievements },
+	] as const;
 
 	return (
 		<header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -36,17 +39,19 @@ export default function Header() {
 							{link.label}
 						</Link>
 					))}
+					<LanguageToggle />
 					<ThemeToggle />
 				</div>
 
 				{/* Mobile toggle */}
 				<div className="flex items-center gap-3 md:hidden">
+					<LanguageToggle />
 					<ThemeToggle />
 					<button
 						type="button"
 						onClick={() => setMobileOpen(!mobileOpen)}
 						className="rounded-lg p-2 text-foreground transition-colors hover:bg-muted"
-						aria-label="Toggle menu"
+						aria-label={t.nav.toggleMenu}
 					>
 						{mobileOpen ? <X size={20} /> : <Menu size={20} />}
 					</button>
