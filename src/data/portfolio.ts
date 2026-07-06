@@ -36,7 +36,9 @@ export const skillCategories: SkillCategory[] = [
 			"Building responsive, interactive UIs with modern frameworks and tooling.",
 		skills: [
 			"React",
+			"React Native",
 			"Next.js",
+			"Expo",
 			"TanStack Start",
 			"TanStack Query",
 			"TypeScript",
@@ -69,8 +71,10 @@ export const skillCategories: SkillCategory[] = [
 
 export const techStack = [
 	"React",
+	"React Native",
 	"TypeScript",
 	"Next.js",
+	"Expo",
 	"Node.js",
 	"TanStack Start",
 	"TanStack Query",
@@ -141,6 +145,38 @@ export const projects: ProjectData[] = [
 		featured: true,
 	},
 	{
+		title: "Puls Miasta",
+		subtitle: `App made for the "Złota Apka" national programming competition that won 1st place`,
+		description:
+			"A civic reporting platform built around a React Native mobile app for residents and a React + Next.js admin panel for city officials. Residents can submit photo-based city reports with location data, browse and vote on local issues, comment, use a map or heatmap view, receive notifications, and contact officials through chat. The web panel gives officials tools for managing pulses, reports, users, status workflows, moderation, chat, and city map settings.",
+		technologies: [
+			"React Native",
+			"Expo",
+			"React",
+			"Next.js",
+			"TypeScript",
+			"Tailwind CSS",
+			"NativeWind",
+			"TanStack Query",
+			"MapLibre",
+			"Zod",
+			"WebAuthn",
+			"Passkeys",
+			"STOMP",
+			"Expo Notifications",
+			"Biome",
+		],
+		role: "Mobile & Web Developer - React Native app and Next.js admin panel.",
+		achievements: [
+			"Built the mobile app with Expo Router, a pulse feed, multi-step photo submission flow, GPS/manual location handling, voting, comments, profile stats, badges, push notifications, chat, and biometric/passkey login",
+			"Implemented an offline-first draft queue with AsyncStorage persistence, network-aware replay, retry limits, and safeguards against duplicate submissions or missing photo files",
+			"Created the Next.js admin panel for officials with pulse moderation, status updates, report handling for pulses/comments, user management, admin chat, and configurable city map settings",
+			"Integrated MapLibre-based map experiences with clustered pins, category filters, heatmap mode, city presets, and viewport-based pulse loading",
+		],
+		repoUrl: "https://github.com/puls-miasta-app",
+		featured: true,
+	},
+	{
 		title: "Warehouse Management System",
 		subtitle: `App made for "Primus Inter Pares 2026" competition that qualified for the national finals (top 3 out of 100+ teams in Poland)`,
 		description: `
@@ -176,7 +212,7 @@ export const projects: ProjectData[] = [
 	},
 	{
 		title: "ConnectUS",
-		subtitle: `App made for "Primus Inter Pares 2024" competition that took 11th place among 100+ teams in Poland`,
+		subtitle: `App made for "Primus Inter Pares 2024" competition that took 10th place among 100+ teams in Poland`,
 		description: `A real-time team messaging platform supporting private and group conversations, file sharing, and user presence tracking. Responsible for the entire backend — designed the REST API and WebSocket layer, implemented authentication with LDAP support, built an admin panel with automated database backup/restore, and structured the codebase following MVC architecture.`,
 		role: "Backend Developer",
 		technologies: [
@@ -237,6 +273,15 @@ export interface AchievementItem {
 
 export const achievements: AchievementItem[] = [
 	{
+		title: "Złota Apka - 1st Place",
+		issuer: `Ogólnopolski Konkurs Programistyczny "Złota Apka"`,
+		date: "2026",
+		description:
+			"Awarded 1st place for Puls Miasta, a civic reporting system built with a React Native mobile app and a React + Next.js web admin panel.",
+		type: "award",
+		url: "https://github.com/puls-miasta-app",
+	},
+	{
 		title: "Primus Inter Pares 2026 - 3rd Place",
 		issuer: "Primus Inter Pares",
 		date: "2026",
@@ -255,11 +300,11 @@ export const achievements: AchievementItem[] = [
 		url: "https://zs.ketrzyn.pl/projekty/sprawozdanie-z-konkursu-aplikacja-edukacyjna-2025%f0%9f%92%bb%f0%9f%96%a5/",
 	},
 	{
-		title: "Primus Inter Pares 2024 - 11th Place",
+		title: "Primus Inter Pares 2024 - 10th Place",
 		issuer: "Primus Inter Pares",
 		date: "2024",
 		description:
-			"Taking 11th place for developing an application for team messaging in a national competition for IT students.",
+			"Taking 10th place for developing an application for team messaging in a national competition for IT students.",
 		type: "accomplishment",
 		url: "https://zs.ketrzyn.pl/aktualnosci/primus-inter-pares-sprawozdanie-2024/",
 	},
