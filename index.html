@@ -1,13 +1,77 @@
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio - Łukasz Żyszkiewicz</title>
+    <title>Łukasz Żyszkiewicz · Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Łukasz Żyszkiewicz, a full-stack developer from Poland building with React, Next.js, React Native and TypeScript. Winner of the Złota Apka national programming competition."
+    />
+    <meta name="author" content="Łukasz Żyszkiewicz" />
+    <link rel="canonical" href="https://1zuwi1.github.io/" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Łukasz Żyszkiewicz" />
+    <meta property="og:title" content="Łukasz Żyszkiewicz · Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="React, Next.js, React Native and TypeScript. Projects, competition wins and contact."
+    />
+    <meta property="og:url" content="https://1zuwi1.github.io/" />
+    <meta property="og:image" content="https://1zuwi1.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Łukasz Żyszkiewicz, Full-Stack Developer" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Icons and PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0d" media="(prefers-color-scheme: dark)" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Łukasz Żyszkiewicz",
+        "jobTitle": "Full-Stack Developer",
+        "url": "https://1zuwi1.github.io/",
+        "email": "mailto:zyszkiewicz.lukasz@proton.me",
+        "address": { "@type": "PostalAddress", "addressLocality": "Kętrzyn", "addressCountry": "PL" },
+        "sameAs": [
+          "https://github.com/1Zuwi1",
+          "https://www.linkedin.com/in/%C5%82ukasz-%C5%BCyszkiewicz-0b541036a/"
+        ]
+      }
+    </script>
+
+    <!-- Apply the saved theme before first paint to avoid a light/dark flash -->
+    <script>
+      (function () {
+        try {
+          var mode = localStorage.getItem("theme");
+          if (mode !== "light" && mode !== "dark") mode = "auto";
+          var dark = mode === "dark" || (mode === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+          var root = document.documentElement;
+          root.classList.add(dark ? "dark" : "light");
+          root.style.colorScheme = dark ? "dark" : "light";
+          if (mode !== "auto") root.setAttribute("data-theme", mode);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="app"></div>
+    <noscript>
+      Łukasz Żyszkiewicz, Full-Stack Developer. This site needs JavaScript. You can reach me at
+      <a href="mailto:zyszkiewicz.lukasz@proton.me">zyszkiewicz.lukasz@proton.me</a> or on
+      <a href="https://github.com/1Zuwi1">GitHub</a>.
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
