@@ -4,6 +4,7 @@ import SectionHeading from "#/components/SectionHeading";
 import { projects } from "#/data/portfolio";
 
 export const Route = createFileRoute("/projects")({
+	staticData: { title: "Projects" },
 	component: ProjectsPage,
 });
 

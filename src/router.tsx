@@ -1,18 +1,12 @@
-import {
-	createHashHistory,
-	createRouter as createTanStackRouter,
-} from "@tanstack/react-router";
+import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 export function getRouter() {
-	const hashHistory = createHashHistory();
-
 	const router = createTanStackRouter({
 		routeTree,
 		scrollRestoration: true,
 		defaultPreload: "intent",
 		defaultPreloadStaleTime: 0,
-		history: hashHistory,
 	});
 
 	return router;
@@ -21,5 +15,9 @@ export function getRouter() {
 declare module "@tanstack/react-router" {
 	interface Register {
 		router: ReturnType<typeof getRouter>;
+	}
+	interface StaticDataRouteOption {
+		/** Page title shown in the browser tab, before the site name. */
+		title?: string;
 	}
 }

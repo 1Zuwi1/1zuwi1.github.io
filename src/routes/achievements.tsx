@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
 import { type AchievementItem, achievements } from "#/data/portfolio";
 
 export const Route = createFileRoute("/achievements")({
+	staticData: { title: "Achievements" },
 	component: AchievementsPage,
 });
 
