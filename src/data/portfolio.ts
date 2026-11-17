@@ -328,85 +328,150 @@ export interface PricingPlan {
 	highlighted?: boolean;
 }
 
-export interface PricingExtra {
+export interface AppService {
 	name: string;
 	description: string;
 	/** Starting price in PLN */
 	priceFrom: number;
+	timeline: string;
+	icon: "web" | "mobile" | "store" | "integration";
+	features: string[];
+}
+
+export interface PricingExtra {
+	name: string;
+	description: string;
+	/** Starting price in PLN. Leave out to show "price agreed individually". */
+	priceFrom?: number;
 	/** Shown after the price, e.g. "/ month" */
 	unit?: string;
 }
 
+/** Website packages */
 export const pricingPlans: PricingPlan[] = [
 	{
-		name: "Landing Page",
+		name: "Starter",
 		description:
-			"A single, fast page that presents your offer and turns visitors into enquiries.",
-		priceFrom: 500,
-		timeline: "1-2 weeks",
+			"A modern one-page site or landing page. Ideal to get online fast.",
+		priceFrom: 300,
+		timeline: "3-7 days",
 		features: [
 			"One-page design tailored to your brand",
 			"Responsive on phones, tablets and desktops",
-			"Contact form or click-to-call / email",
+			"Contact form, click-to-call and Google Maps",
 			"Basic SEO and social media previews",
 			"Deployment and domain setup",
+			"3 months of free care",
 		],
 	},
 	{
-		name: "Business Website",
+		name: "Business",
 		description:
-			"A multi-page site for a company or freelancer that you can update yourself.",
-		priceFrom: 1000,
-		timeline: "2-4 weeks",
+			"A multi-page site for a company or freelancer, with room to grow.",
+		priceFrom: 600,
+		timeline: "1-2 weeks",
 		features: [
-			"Up to 6 subpages (home, offer, about, gallery, contact…)",
-			"Optional content editing panel (CMS) for texts and photos",
-			"Google Maps, contact form and analytics",
-			"Technical SEO and good PageSpeed scores",
-			"Optional second language",
-			"30 days of free fixes after launch",
+			"Up to 6 subpages (offer, about, gallery, contact…)",
+			"Content editing panel (CMS) for texts and photos",
+			"Contact form, Google Maps and analytics",
+			"Technical SEO and fast PageSpeed scores",
+			"6 months of free care",
 		],
 		highlighted: true,
 	},
 	{
-		name: "Web Application",
+		name: "Premium",
 		description:
-			"A custom system built around your process: panels, accounts, payments, integrations.",
-		priceFrom: 1500,
-		timeline: "from 6 weeks",
+			"A fully featured site with custom functions and extra services.",
+		priceFrom: 1000,
+		timeline: "2-4 weeks",
 		features: [
-			"User accounts, roles and secure login (incl. 2FA)",
-			"Admin panel and dashboards",
-			"Integrations with external APIs (payments, couriers, marketplaces)",
-			"Database design and REST API",
-			"Docker deployment and CI/CD",
-			"Price depends on the features, agreed in a written estimate",
+			"Unlimited subpages, blog or news section",
+			"Custom features: booking, calculators, client area",
+			"Second language version",
+			"Unlimited revisions during the project",
+			"One redesign refresh within 6 months",
+			"12 months of free care",
+		],
+	},
+];
+
+/** Apps and custom software */
+export const appServices: AppService[] = [
+	{
+		name: "Web application",
+		description:
+			"Custom systems, dashboards and SaaS built around your process.",
+		priceFrom: 1500,
+		timeline: "from 3 weeks",
+		icon: "web",
+		features: [
+			"Accounts, roles and secure login (2FA)",
+			"Admin panel, tables and reports",
+			"Database and REST API",
+		],
+	},
+	{
+		name: "Mobile app",
+		description: "One codebase for iOS and Android, built with React Native.",
+		priceFrom: 3000,
+		timeline: "from 4 weeks",
+		icon: "mobile",
+		features: [
+			"Push notifications, camera, maps, GPS",
+			"Offline mode and login with passkeys",
+			"Help with App Store and Google Play release",
+		],
+	},
+	{
+		name: "Online store",
+		description: "A fast, custom store without monthly platform fees.",
+		priceFrom: 1200,
+		timeline: "from 2 weeks",
+		icon: "store",
+		features: [
+			"Products, cart and order management",
+			"Online payments (BLIK, Przelewy24, cards)",
+			"Courier integration (InPost, DPD)",
+		],
+	},
+	{
+		name: "Integrations & automation",
+		description: "Connect the tools you already use and stop retyping data.",
+		priceFrom: 400,
+		timeline: "from 1 week",
+		icon: "integration",
+		features: [
+			"Allegro, eBay, InPost, DPD and other APIs",
+			"Invoices, labels and stock sync",
+			"Scripts, bots and AI assistants",
 		],
 	},
 ];
 
 export const pricingExtras: PricingExtra[] = [
 	{
-		name: "Mobile app",
-		description: "iOS and Android app built with React Native and Expo.",
-		priceFrom: 3000,
-	},
-	{
-		name: "Care & maintenance",
+		name: "Care plan, monthly",
 		description: "Updates, backups, monitoring and small content changes.",
-		priceFrom: 150,
+		priceFrom: 20,
 		unit: "/ month",
 	},
 	{
-		name: "Hourly work",
-		description: "Fixes and new features in an existing project.",
-		priceFrom: 100,
-		unit: "/ hour",
+		name: "Care plan, yearly",
+		description: "The same care for a full year, at a lower price.",
+		priceFrom: 200,
+		unit: "/ year",
+	},
+	{
+		name: "Fixes & new features",
+		description:
+			"Changes, fixes or new features in an existing site or app, also one not built by me.",
 	},
 ];
 
 export const pricingNotes: string[] = [
 	"All prices are net (VAT not included) and are starting points. The final quote depends on scope and is always agreed before work starts.",
+	"Free care covers updates, security fixes and small text or photo changes.",
 	"Domain, hosting and paid third-party services are billed separately at cost.",
 	"Work is split into stages, with a deposit before the first one.",
 ];

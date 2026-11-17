@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, Clock, Info, Mail } from "lucide-react";
+import {
+	Check,
+	Clock,
+	Globe,
+	Info,
+	Mail,
+	Plug,
+	ShoppingCart,
+	Smartphone,
+} from "lucide-react";
 import SectionHeading from "#/components/SectionHeading";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
@@ -11,6 +20,8 @@ import {
 	CardTitle,
 } from "#/components/ui/card";
 import {
+	type AppService,
+	appServices,
 	type PricingPlan,
 	personalInfo,
 	pricingExtras,
@@ -24,6 +35,13 @@ export const Route = createFileRoute("/pricing")({
 	component: PricingPage,
 });
 
+const appIcons = {
+	web: Globe,
+	mobile: Smartphone,
+	store: ShoppingCart,
+	integration: Plug,
+} as const;
+
 function inquiryHref(subject: string) {
 	return `mailto:${personalInfo.email}?subject=${encodeURIComponent(subject)}`;
 }
@@ -35,20 +53,39 @@ function PricingPage() {
 				<SectionHeading
 					label="Pricing"
 					title="Services & pricing"
-					description="Clear starting prices for the most common projects. Every project gets its own quote, so treat these as a guide, not a ceiling."
+					description="From a simple website to a custom web or mobile app. Clear starting prices, and every project gets its own quote."
 				/>
 
-				{/* Plans */}
+				{/* Website plans */}
+				<h3 className="mb-6 font-mono text-xs font-medium uppercase tracking-widest text-warm">
+					Websites
+				</h3>
 				<div className="stagger-children grid items-stretch gap-6 lg:grid-cols-3">
 					{pricingPlans.map((plan) => (
 						<PlanCard key={plan.name} plan={plan} />
 					))}
 				</div>
 
+				{/* Apps */}
+				<div className="mt-20">
+					<h3 className="font-mono text-xs font-medium uppercase tracking-widest text-warm">
+						Apps & custom software
+					</h3>
+					<p className="mt-2 mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+						When a website isn't enough. The same stack I used for OrderMaster
+						and the award-winning Puls Miasta app.
+					</p>
+					<div className="grid gap-6 md:grid-cols-2">
+						{appServices.map((service) => (
+							<AppCard key={service.name} service={service} />
+						))}
+					</div>
+				</div>
+
 				{/* Extras */}
 				<div className="mt-20">
 					<h3 className="mb-6 font-mono text-xs font-medium uppercase tracking-widest text-warm">
-						Other services
+						Care & extra work
 					</h3>
 					<div className="grid gap-4 md:grid-cols-3">
 						{pricingExtras.map((extra) => (
@@ -60,14 +97,25 @@ function PricingPage() {
 									{extra.name}
 								</h4>
 								<p className="mt-1 font-mono text-sm text-warm">
-									<span className="text-xs text-muted-foreground">from </span>
-									{formatPLN(extra.priceFrom)}
-									<span className="text-xs text-muted-foreground"> net</span>
-									{extra.unit && (
-										<span className="text-xs text-muted-foreground">
-											{" "}
-											{extra.unit}
-										</span>
+									{extra.priceFrom === undefined ? (
+										"Price agreed individually"
+									) : (
+										<>
+											<span className="text-xs text-muted-foreground">
+												from{" "}
+											</span>
+											{formatPLN(extra.priceFrom)}
+											<span className="text-xs text-muted-foreground">
+												{" "}
+												net
+											</span>
+											{extra.unit && (
+												<span className="text-xs text-muted-foreground">
+													{" "}
+													{extra.unit}
+												</span>
+											)}
+										</>
 									)}
 								</p>
 								<p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -174,7 +222,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 
 			<CardFooter>
 				<a
-					href={inquiryHref(`Project inquiry: ${plan.name}`)}
+					href={inquiryHref(`Website inquiry: ${plan.name}`)}
 					className="w-full"
 				>
 					<Button
@@ -192,5 +240,63 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 				</a>
 			</CardFooter>
 		</Card>
+	);
+}
+
+function AppCard({ service }: { service: AppService }) {
+	const Icon = appIcons[service.icon];
+
+	return (
+		<div className="flex flex-col rounded-2xl border border-border/60 bg-card/80 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-warm/20 hover:shadow-lg">
+			<div className="flex items-start justify-between gap-4">
+				<div className="rounded-xl bg-warm/10 p-2.5">
+					<Icon size={20} className="text-warm" />
+				</div>
+				<div className="text-right">
+					<p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+						from
+					</p>
+					<p className="font-heading text-2xl font-extrabold tracking-tight text-foreground">
+						{formatPLN(service.priceFrom)}
+						<span className="ml-1.5 font-mono text-xs font-normal tracking-normal text-muted-foreground">
+							net
+						</span>
+					</p>
+				</div>
+			</div>
+
+			<h4 className="mt-4 font-heading text-lg font-bold text-foreground">
+				{service.name}
+			</h4>
+			<p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+				{service.description}
+			</p>
+
+			<ul className="mt-4 flex-1 space-y-2">
+				{service.features.map((feature) => (
+					<li
+						key={feature}
+						className="flex items-start gap-2 text-sm text-muted-foreground"
+					>
+						<Check size={16} className="mt-0.5 shrink-0 text-warm" />
+						{feature}
+					</li>
+				))}
+			</ul>
+
+			<div className="mt-5 flex items-center justify-between gap-3">
+				<span className="inline-flex items-center gap-1.5 font-mono text-xs text-warm">
+					<Clock size={12} />
+					{service.timeline}
+				</span>
+				<a
+					href={inquiryHref(`Project inquiry: ${service.name}`)}
+					className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-1.5 font-mono text-xs font-medium text-muted-foreground transition-all hover:border-warm/30 hover:text-foreground"
+				>
+					<Mail size={13} />
+					Ask about this
+				</a>
+			</div>
+		</div>
 	);
 }
