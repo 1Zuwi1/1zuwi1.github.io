@@ -13,10 +13,12 @@ import { Button } from "#/components/ui/button";
 import {
 	education,
 	personalInfo,
+	pricingPlans,
 	projects,
 	skillCategories,
 	techStack,
 } from "#/data/portfolio";
+import { formatPLN } from "#/lib/utils";
 
 export const Route = createFileRoute("/")({ component: HomePage });
 
@@ -315,6 +317,10 @@ function ProjectsSection() {
    CONTACT
    ═══════════════════════════════════════════ */
 function ContactSection() {
+	const pricingFrom = formatPLN(
+		Math.min(...pricingPlans.map((plan) => plan.priceFrom)),
+	);
+
 	return (
 		<section id="contact" className="scroll-mt-20 px-6 py-24">
 			<div className="mx-auto max-w-6xl">
@@ -325,6 +331,16 @@ function ContactSection() {
 				/>
 
 				<div className="flex flex-col gap-8">
+					<Link
+						to="/pricing"
+						className="group flex w-fit items-center gap-2 rounded-full border border-warm/20 bg-warm/5 px-4 py-2 font-mono text-sm text-warm no-underline transition-colors hover:bg-warm/10"
+					>
+						Websites from {pricingFrom} net · see services & pricing
+						<ArrowRight
+							size={14}
+							className="transition-transform group-hover:translate-x-0.5"
+						/>
+					</Link>
 					<div className="space-y-2">
 						<h3 className="font-mono text-xs font-medium uppercase tracking-widest text-warm">
 							Email

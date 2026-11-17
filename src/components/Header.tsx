@@ -7,6 +7,7 @@ const navLinks = [
 	{ to: "/", label: "Home" },
 	{ to: "/projects", label: "Projects" },
 	{ to: "/achievements", label: "Achievements" },
+	{ to: "/pricing", label: "Pricing" },
 ] as const;
 
 export default function Header() {
