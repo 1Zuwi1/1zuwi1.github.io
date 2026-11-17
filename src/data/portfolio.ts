@@ -309,3 +309,104 @@ export const achievements: AchievementItem[] = [
 		url: "https://zs.ketrzyn.pl/aktualnosci/primus-inter-pares-sprawozdanie-2024/",
 	},
 ];
+
+// ─────────────────────────────────────────────
+// Pricing — all prices are starting points ("from") in PLN.
+// Change the numbers here; the /pricing page picks them up.
+// ─────────────────────────────────────────────
+
+export interface PricingPlan {
+	name: string;
+	/** Who the package is for, in one sentence */
+	description: string;
+	/** Starting price in PLN */
+	priceFrom: number;
+	/** Typical delivery time */
+	timeline: string;
+	features: string[];
+	/** Shows the plan as the recommended one */
+	highlighted?: boolean;
+}
+
+export interface PricingExtra {
+	name: string;
+	description: string;
+	/** Starting price in PLN */
+	priceFrom: number;
+	/** Shown after the price, e.g. "/ month" */
+	unit?: string;
+}
+
+export const pricingPlans: PricingPlan[] = [
+	{
+		name: "Landing Page",
+		description:
+			"A single, fast page that presents your offer and turns visitors into enquiries.",
+		priceFrom: 1500,
+		timeline: "1-2 weeks",
+		features: [
+			"One-page design tailored to your brand",
+			"Responsive on phones, tablets and desktops",
+			"Contact form or click-to-call / email",
+			"Basic SEO and social media previews",
+			"Deployment and domain setup",
+		],
+	},
+	{
+		name: "Business Website",
+		description:
+			"A multi-page site for a company or freelancer that you can update yourself.",
+		priceFrom: 3500,
+		timeline: "2-4 weeks",
+		features: [
+			"Up to 6 subpages (home, offer, about, gallery, contact…)",
+			"Content editing panel (CMS) so you can change texts and photos",
+			"Google Maps, contact form and analytics",
+			"Technical SEO and good PageSpeed scores",
+			"Optional second language",
+			"30 days of free fixes after launch",
+		],
+		highlighted: true,
+	},
+	{
+		name: "Web Application",
+		description:
+			"A custom system built around your process: panels, accounts, payments, integrations.",
+		priceFrom: 10000,
+		timeline: "from 6 weeks",
+		features: [
+			"User accounts, roles and secure login (incl. 2FA)",
+			"Admin panel and dashboards",
+			"Integrations with external APIs (payments, couriers, marketplaces)",
+			"Database design and REST API",
+			"Docker deployment and CI/CD",
+			"Scope and price agreed in a written estimate",
+		],
+	},
+];
+
+export const pricingExtras: PricingExtra[] = [
+	{
+		name: "Mobile app",
+		description: "iOS and Android app built with React Native and Expo.",
+		priceFrom: 12000,
+	},
+	{
+		name: "Care & maintenance",
+		description: "Updates, backups, monitoring and small content changes.",
+		priceFrom: 150,
+		unit: "/ month",
+	},
+	{
+		name: "Hourly work",
+		description: "Fixes and new features in an existing project.",
+		priceFrom: 100,
+		unit: "/ hour",
+	},
+];
+
+export const pricingNotes: string[] = [
+	"Prices are starting points. The final quote depends on scope and is always agreed before work starts.",
+	"Domain, hosting and paid third-party services are billed separately at cost.",
+	"Work is split into stages, with a deposit before the first one.",
+];
