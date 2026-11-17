@@ -311,7 +311,7 @@ export const achievements: AchievementItem[] = [
 ];
 
 // ─────────────────────────────────────────────
-// Pricing — all prices are starting points ("from") in PLN.
+// Pricing — all prices are net starting points ("from") in PLN.
 // Change the numbers here; the /pricing page picks them up.
 // ─────────────────────────────────────────────
 
@@ -342,7 +342,7 @@ export const pricingPlans: PricingPlan[] = [
 		name: "Landing Page",
 		description:
 			"A single, fast page that presents your offer and turns visitors into enquiries.",
-		priceFrom: 1500,
+		priceFrom: 500,
 		timeline: "1-2 weeks",
 		features: [
 			"One-page design tailored to your brand",
@@ -356,11 +356,11 @@ export const pricingPlans: PricingPlan[] = [
 		name: "Business Website",
 		description:
 			"A multi-page site for a company or freelancer that you can update yourself.",
-		priceFrom: 3500,
+		priceFrom: 1000,
 		timeline: "2-4 weeks",
 		features: [
 			"Up to 6 subpages (home, offer, about, gallery, contact…)",
-			"Content editing panel (CMS) so you can change texts and photos",
+			"Optional content editing panel (CMS) for texts and photos",
 			"Google Maps, contact form and analytics",
 			"Technical SEO and good PageSpeed scores",
 			"Optional second language",
@@ -372,7 +372,7 @@ export const pricingPlans: PricingPlan[] = [
 		name: "Web Application",
 		description:
 			"A custom system built around your process: panels, accounts, payments, integrations.",
-		priceFrom: 10000,
+		priceFrom: 1500,
 		timeline: "from 6 weeks",
 		features: [
 			"User accounts, roles and secure login (incl. 2FA)",
@@ -380,7 +380,7 @@ export const pricingPlans: PricingPlan[] = [
 			"Integrations with external APIs (payments, couriers, marketplaces)",
 			"Database design and REST API",
 			"Docker deployment and CI/CD",
-			"Scope and price agreed in a written estimate",
+			"Price depends on the features, agreed in a written estimate",
 		],
 	},
 ];
@@ -389,7 +389,7 @@ export const pricingExtras: PricingExtra[] = [
 	{
 		name: "Mobile app",
 		description: "iOS and Android app built with React Native and Expo.",
-		priceFrom: 12000,
+		priceFrom: 3000,
 	},
 	{
 		name: "Care & maintenance",
@@ -406,7 +406,7 @@ export const pricingExtras: PricingExtra[] = [
 ];
 
 export const pricingNotes: string[] = [
-	"Prices are starting points. The final quote depends on scope and is always agreed before work starts.",
+	"All prices are net (VAT not included) and are starting points. The final quote depends on scope and is always agreed before work starts.",
 	"Domain, hosting and paid third-party services are billed separately at cost.",
 	"Work is split into stages, with a deposit before the first one.",
 ];

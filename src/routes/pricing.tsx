@@ -62,6 +62,7 @@ function PricingPage() {
 								<p className="mt-1 font-mono text-sm text-warm">
 									<span className="text-xs text-muted-foreground">from </span>
 									{formatPLN(extra.priceFrom)}
+									<span className="text-xs text-muted-foreground"> net</span>
 									{extra.unit && (
 										<span className="text-xs text-muted-foreground">
 											{" "}
@@ -148,6 +149,9 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 					</p>
 					<p className="font-heading text-4xl font-extrabold tracking-tight text-foreground">
 						{formatPLN(plan.priceFrom)}
+						<span className="ml-2 font-mono text-sm font-normal tracking-normal text-muted-foreground">
+							net
+						</span>
 					</p>
 					<p className="mt-2 inline-flex items-center gap-1.5 font-mono text-xs text-warm">
 						<Clock size={12} />

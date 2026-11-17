@@ -335,7 +335,7 @@ function ContactSection() {
 						to="/pricing"
 						className="group flex w-fit items-center gap-2 rounded-full border border-warm/20 bg-warm/5 px-4 py-2 font-mono text-sm text-warm no-underline transition-colors hover:bg-warm/10"
 					>
-						Website from {pricingFrom} · see services & pricing
+						Websites from {pricingFrom} net · see services & pricing
 						<ArrowRight
 							size={14}
 							className="transition-transform group-hover:translate-x-0.5"
