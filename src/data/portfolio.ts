@@ -453,7 +453,7 @@ export const pricingExtras: PricingExtra[] = [
 	{
 		name: "Opieka nad stroną, miesięcznie",
 		description:
-			"Aktualizacje, kopie zapasowe, monitoring i drobne zmiany treści.",
+			"Dla stron: aktualizacje, kopie zapasowe, monitoring i drobne zmiany treści. Opieka nad aplikacją rośnie z modułami, sprawdź w kalkulatorze.",
 		priceFrom: 20,
 		unit: "/ mies.",
 	},
@@ -473,6 +473,367 @@ export const pricingExtras: PricingExtra[] = [
 export const pricingNotes: string[] = [
 	"Wszystkie ceny są cenami netto i cenami startowymi. Ostateczna wycena zależy od zakresu i zawsze ustalamy ją przed rozpoczęciem prac.",
 	"Darmowa opieka obejmuje aktualizacje, poprawki bezpieczeństwa i drobne zmiany tekstów lub zdjęć.",
-	"Domena, hosting i płatne usługi zewnętrzne są rozliczane osobno, po kosztach.",
+	"Przy stronach domena i hosting są rozliczane osobno, po kosztach. W opiece nad aplikacją i sklepem domena i serwer są w cenie.",
+	"Płatne usługi zewnętrzne (np. konto w App Store, API AI, bramka płatności) są rozliczane osobno.",
 	"Prace dzielimy na etapy, z zaliczką przed pierwszym z nich.",
+];
+
+// ─────────────────────────────────────────────
+// Project configurator on /pricing — a Basic package per project type
+// plus optional modules. All prices are net PLN and indicative.
+// ─────────────────────────────────────────────
+
+export interface ConfiguratorModule {
+	id: string;
+	name: string;
+	description: string;
+	/** Net price in PLN (per unit when `unit` is set) */
+	price: number;
+	/** When set, the module has a quantity picker, e.g. "szt." */
+	unit?: string;
+	/** Highest quantity for modules with a unit */
+	max?: number;
+	/** Extra monthly care cost in PLN that this module adds (per unit) */
+	care?: number;
+}
+
+export interface ConfiguratorType {
+	id: string;
+	name: string;
+	icon: AppService["icon"];
+	base: {
+		name: string;
+		price: number;
+		/** Monthly care cost in PLN for the Basic package */
+		care: number;
+		includes: string[];
+	};
+	/** What the monthly care covers for this project type */
+	careIncludes: string;
+	modules: ConfiguratorModule[];
+}
+
+export const configuratorTypes: ConfiguratorType[] = [
+	{
+		id: "website",
+		name: "Strona internetowa",
+		icon: "web",
+		base: {
+			name: "Basic",
+			price: 300,
+			care: 20,
+			includes: [
+				"Strona jednostronicowa",
+				"Wersja na telefony",
+				"Formularz kontaktowy",
+				"Podstawowe SEO",
+				"3 miesiące darmowej opieki",
+			],
+		},
+		careIncludes:
+			"Pierwsze 3 miesiące za darmo. Aktualizacje, kopie zapasowe, monitoring i drobne zmiany treści. Domena i hosting osobno, po kosztach.",
+		modules: [
+			{
+				id: "subpages",
+				name: "Dodatkowe podstrony",
+				description: "Oferta, o nas, galeria, cennik…",
+				price: 40,
+				care: 2,
+				unit: "szt.",
+				max: 20,
+			},
+			{
+				id: "cms",
+				name: "Panel edycji treści (CMS)",
+				description: "Sam zmieniasz teksty i zdjęcia",
+				price: 150,
+				care: 5,
+			},
+			{
+				id: "blog",
+				name: "Blog lub aktualności",
+				description: "Wpisy z kategoriami i zdjęciami",
+				price: 100,
+				care: 5,
+			},
+			{
+				id: "gallery",
+				name: "Galeria / portfolio",
+				description: "Zdjęcia realizacji z podglądem",
+				price: 50,
+			},
+			{
+				id: "booking",
+				name: "Rezerwacje online",
+				description: "Kalendarz wizyt z potwierdzeniem e-mail",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "language",
+				name: "Druga wersja językowa",
+				description: "Przełącznik języka, bez tłumaczenia tekstów",
+				price: 150,
+				care: 5,
+			},
+			{
+				id: "analytics",
+				name: "Statystyki i piksele",
+				description: "Google Analytics, Meta Pixel, zgody cookies",
+				price: 50,
+			},
+		],
+	},
+	{
+		id: "webapp",
+		name: "Aplikacja webowa",
+		icon: "web",
+		base: {
+			name: "Basic",
+			price: 1500,
+			care: 80,
+			includes: [
+				"Rejestracja i logowanie",
+				"Prosty panel administracyjny",
+				"Baza danych i REST API",
+				"Wersja na telefony",
+				"Wdrożenie na serwer",
+			],
+		},
+		careIncludes:
+			"W cenie: domena, serwer i wdrożenie, aktualizacje, kopie zapasowe, monitoring i poprawki błędów.",
+		modules: [
+			{
+				id: "roles",
+				name: "Role i uprawnienia",
+				description: "Np. admin, pracownik, klient",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "2fa",
+				name: "Logowanie 2FA / passkeys",
+				description: "Kod z aplikacji, e-mail lub klucz dostępu",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "payments",
+				name: "Płatności i subskrypcje",
+				description: "BLIK, Przelewy24, karty, plany abonamentowe",
+				price: 400,
+				care: 20,
+			},
+			{
+				id: "notifications",
+				name: "Powiadomienia e-mail",
+				description: "Automatyczne wiadomości do użytkowników",
+				price: 100,
+				care: 5,
+			},
+			{
+				id: "reports",
+				name: "Raporty i wykresy",
+				description: "Dashboard ze statystykami",
+				price: 300,
+				care: 10,
+			},
+			{
+				id: "export",
+				name: "Eksport PDF / Excel / CSV",
+				description: "Pobieranie danych i dokumentów",
+				price: 150,
+				care: 5,
+			},
+			{
+				id: "chat",
+				name: "Czat w czasie rzeczywistym",
+				description: "Wiadomości między użytkownikami",
+				price: 400,
+				care: 20,
+			},
+			{
+				id: "i18n",
+				name: "Wielojęzyczność",
+				description: "Np. PL i EN",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "api",
+				name: "Integracja z zewnętrznym API",
+				description: "Allegro, InPost, fakturownia, CRM…",
+				price: 300,
+				care: 15,
+				unit: "szt.",
+				max: 10,
+			},
+			{
+				id: "ai",
+				name: "Asystent AI",
+				description: "Odpowiedzi dla klientów, analiza danych",
+				price: 500,
+				care: 30,
+			},
+		],
+	},
+	{
+		id: "mobile",
+		name: "Aplikacja mobilna",
+		icon: "mobile",
+		base: {
+			name: "Basic",
+			price: 3000,
+			care: 100,
+			includes: [
+				"Aplikacja na iOS i Androida",
+				"Logowanie i konto użytkownika",
+				"Do 8 ekranów",
+				"Backend z bazą danych",
+			],
+		},
+		careIncludes:
+			"W cenie: domena i serwer dla backendu, aktualizacje pod nowe wersje iOS i Androida, kopie zapasowe i poprawki błędów.",
+		modules: [
+			{
+				id: "push",
+				name: "Powiadomienia push",
+				description: "Wiadomości na ekranie telefonu",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "maps",
+				name: "Mapy i GPS",
+				description: "Lokalizacja, pinezki, trasy",
+				price: 300,
+				care: 10,
+			},
+			{
+				id: "camera",
+				name: "Aparat i zdjęcia",
+				description: "Robienie i wysyłanie zdjęć",
+				price: 150,
+				care: 5,
+			},
+			{
+				id: "offline",
+				name: "Tryb offline",
+				description: "Działa bez internetu, synchronizuje później",
+				price: 400,
+				care: 15,
+			},
+			{
+				id: "biometrics",
+				name: "Logowanie biometryczne",
+				description: "Face ID, odcisk palca, passkeys",
+				price: 150,
+				care: 5,
+			},
+			{
+				id: "payments",
+				name: "Płatności w aplikacji",
+				description: "BLIK, karty, subskrypcje",
+				price: 400,
+				care: 20,
+			},
+			{
+				id: "chat",
+				name: "Czat",
+				description: "Wiadomości w czasie rzeczywistym",
+				price: 400,
+				care: 20,
+			},
+			{
+				id: "admin",
+				name: "Panel administracyjny (web)",
+				description: "Zarządzanie użytkownikami i treściami",
+				price: 700,
+				care: 30,
+			},
+			{
+				id: "stores",
+				name: "Publikacja w sklepach",
+				description: "App Store i Google Play",
+				price: 200,
+				care: 10,
+			},
+		],
+	},
+	{
+		id: "store",
+		name: "Sklep internetowy",
+		icon: "store",
+		base: {
+			name: "Basic",
+			price: 1200,
+			care: 50,
+			includes: [
+				"Produkty, koszyk i zamówienia",
+				"Jedna bramka płatności",
+				"Panel do zarządzania sklepem",
+				"Wersja na telefony",
+			],
+		},
+		careIncludes:
+			"W cenie: domena, serwer i wdrożenie, aktualizacje, kopie zapasowe, monitoring i poprawki błędów.",
+		modules: [
+			{
+				id: "variants",
+				name: "Warianty produktów",
+				description: "Rozmiary, kolory, osobne stany",
+				price: 100,
+				care: 5,
+			},
+			{
+				id: "accounts",
+				name: "Konta klientów",
+				description: "Historia zamówień, zapisane adresy",
+				price: 150,
+				care: 5,
+			},
+			{
+				id: "discounts",
+				name: "Kody rabatowe",
+				description: "Procentowe i kwotowe, z datą ważności",
+				price: 100,
+				care: 5,
+			},
+			{
+				id: "couriers",
+				name: "Integracja z kurierami",
+				description: "InPost, DPD: etykiety i śledzenie",
+				price: 200,
+				care: 15,
+			},
+			{
+				id: "invoices",
+				name: "Automatyczne faktury",
+				description: "Wystawianie i wysyłka po zakupie",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "allegro",
+				name: "Integracja z Allegro",
+				description: "Synchronizacja ofert i zamówień",
+				price: 400,
+				care: 20,
+			},
+			{
+				id: "i18n",
+				name: "Wielojęzyczność i waluty",
+				description: "Np. PL/EN, PLN/EUR",
+				price: 200,
+				care: 10,
+			},
+			{
+				id: "newsletter",
+				name: "Newsletter",
+				description: "Zapis i wysyłka do klientów",
+				price: 100,
+				care: 5,
+			},
+		],
+	},
 ];

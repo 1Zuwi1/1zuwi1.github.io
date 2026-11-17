@@ -9,6 +9,7 @@ import {
 	ShoppingCart,
 	Smartphone,
 } from "lucide-react";
+import PriceConfigurator from "#/components/PriceConfigurator";
 import SectionHeading from "#/components/SectionHeading";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
@@ -80,6 +81,19 @@ function PricingPage() {
 							<AppCard key={service.name} service={service} />
 						))}
 					</div>
+				</div>
+
+				{/* Configurator */}
+				<div id="kalkulator" className="mt-20 scroll-mt-24">
+					<h3 className="font-mono text-xs font-medium uppercase tracking-widest text-warm">
+						Kalkulator projektu
+					</h3>
+					<p className="mt-2 mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+						Wybierz rodzaj projektu, zaznacz potrzebne moduły i od razu zobacz
+						orientacyjną cenę oraz koszt opieki. Wycenę wyślesz mi jednym
+						kliknięciem.
+					</p>
+					<PriceConfigurator />
 				</div>
 
 				{/* Extras */}
