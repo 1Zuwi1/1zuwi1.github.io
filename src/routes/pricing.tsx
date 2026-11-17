@@ -31,7 +31,7 @@ import {
 import { cn, formatPLN } from "#/lib/utils";
 
 export const Route = createFileRoute("/pricing")({
-	staticData: { title: "Pricing" },
+	staticData: { title: "Cennik" },
 	component: PricingPage,
 });
 
@@ -48,17 +48,17 @@ function inquiryHref(subject: string) {
 
 function PricingPage() {
 	return (
-		<div className="px-6 py-24">
+		<div lang="pl" className="px-6 py-24">
 			<div className="mx-auto max-w-6xl">
 				<SectionHeading
-					label="Pricing"
-					title="Services & pricing"
-					description="From a simple website to a custom web or mobile app. Clear starting prices, and every project gets its own quote."
+					label="Cennik"
+					title="Usługi i cennik"
+					description="Od prostej strony po aplikację webową lub mobilną na zamówienie. Jasne ceny startowe, a każdy projekt wyceniam indywidualnie."
 				/>
 
 				{/* Website plans */}
 				<h3 className="mb-6 font-mono text-xs font-medium uppercase tracking-widest text-warm">
-					Websites
+					Strony internetowe
 				</h3>
 				<div className="stagger-children grid items-stretch gap-6 lg:grid-cols-3">
 					{pricingPlans.map((plan) => (
@@ -69,11 +69,11 @@ function PricingPage() {
 				{/* Apps */}
 				<div className="mt-20">
 					<h3 className="font-mono text-xs font-medium uppercase tracking-widest text-warm">
-						Apps & custom software
+						Aplikacje i oprogramowanie
 					</h3>
 					<p className="mt-2 mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-						When a website isn't enough. The same stack I used for OrderMaster
-						and the award-winning Puls Miasta app.
+						Gdy sama strona nie wystarczy. Te same technologie, w których
+						zbudowałem OrderMaster i nagradzaną aplikację Puls Miasta.
 					</p>
 					<div className="grid gap-6 md:grid-cols-2">
 						{appServices.map((service) => (
@@ -85,7 +85,7 @@ function PricingPage() {
 				{/* Extras */}
 				<div className="mt-20">
 					<h3 className="mb-6 font-mono text-xs font-medium uppercase tracking-widest text-warm">
-						Care & extra work
+						Opieka i dodatkowe prace
 					</h3>
 					<div className="grid gap-4 md:grid-cols-3">
 						{pricingExtras.map((extra) => (
@@ -98,16 +98,14 @@ function PricingPage() {
 								</h4>
 								<p className="mt-1 font-mono text-sm text-warm">
 									{extra.priceFrom === undefined ? (
-										"Price agreed individually"
+										"Cena do ustalenia"
 									) : (
 										<>
-											<span className="text-xs text-muted-foreground">
-												from{" "}
-											</span>
+											<span className="text-xs text-muted-foreground">od </span>
 											{formatPLN(extra.priceFrom)}
 											<span className="text-xs text-muted-foreground">
 												{" "}
-												net
+												netto
 											</span>
 											{extra.unit && (
 												<span className="text-xs text-muted-foreground">
@@ -142,14 +140,14 @@ function PricingPage() {
 				{/* CTA */}
 				<div className="mt-20 rounded-4xl border border-warm/20 bg-warm/5 p-8 text-center sm:p-12">
 					<h3 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-						Not sure which package fits?
+						Nie wiesz, który pakiet wybrać?
 					</h3>
 					<p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-						Write a few sentences about your idea. I'll reply with questions or
-						a free estimate, usually within 24 hours.
+						Napisz w kilku zdaniach, czego potrzebujesz. Odpowiem z pytaniami
+						albo darmową wyceną, zwykle w ciągu 24 godzin.
 					</p>
 					<a
-						href={inquiryHref("Project estimate")}
+						href={inquiryHref("Wycena projektu")}
 						className="mt-8 inline-block"
 					>
 						<Button
@@ -157,7 +155,7 @@ function PricingPage() {
 							className="gap-2 bg-warm text-warm-foreground hover:bg-warm/90"
 						>
 							<Mail size={16} />
-							Get a free estimate
+							Darmowa wycena
 						</Button>
 					</a>
 				</div>
@@ -182,7 +180,9 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 						{plan.name}
 					</CardTitle>
 					{plan.highlighted && (
-						<Badge className="bg-warm text-warm-foreground">Most popular</Badge>
+						<Badge className="bg-warm text-warm-foreground">
+							Najczęściej wybierany
+						</Badge>
 					)}
 				</div>
 				<p className="text-sm leading-relaxed text-muted-foreground">
@@ -193,12 +193,12 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 			<CardContent className="flex-1 space-y-6">
 				<div>
 					<p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-						from
+						od
 					</p>
 					<p className="font-heading text-4xl font-extrabold tracking-tight text-foreground">
 						{formatPLN(plan.priceFrom)}
 						<span className="ml-2 font-mono text-sm font-normal tracking-normal text-muted-foreground">
-							net
+							netto
 						</span>
 					</p>
 					<p className="mt-2 inline-flex items-center gap-1.5 font-mono text-xs text-warm">
@@ -222,7 +222,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 
 			<CardFooter>
 				<a
-					href={inquiryHref(`Website inquiry: ${plan.name}`)}
+					href={inquiryHref(`Zapytanie o stronę: ${plan.name}`)}
 					className="w-full"
 				>
 					<Button
@@ -235,7 +235,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
 						)}
 					>
 						<Mail size={16} />
-						Ask about this
+						Zapytaj o wycenę
 					</Button>
 				</a>
 			</CardFooter>
@@ -254,12 +254,12 @@ function AppCard({ service }: { service: AppService }) {
 				</div>
 				<div className="text-right">
 					<p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-						from
+						od
 					</p>
 					<p className="font-heading text-2xl font-extrabold tracking-tight text-foreground">
 						{formatPLN(service.priceFrom)}
 						<span className="ml-1.5 font-mono text-xs font-normal tracking-normal text-muted-foreground">
-							net
+							netto
 						</span>
 					</p>
 				</div>
@@ -290,11 +290,11 @@ function AppCard({ service }: { service: AppService }) {
 					{service.timeline}
 				</span>
 				<a
-					href={inquiryHref(`Project inquiry: ${service.name}`)}
+					href={inquiryHref(`Zapytanie: ${service.name}`)}
 					className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-1.5 font-mono text-xs font-medium text-muted-foreground transition-all hover:border-warm/30 hover:text-foreground"
 				>
 					<Mail size={13} />
-					Ask about this
+					Zapytaj o wycenę
 				</a>
 			</div>
 		</div>

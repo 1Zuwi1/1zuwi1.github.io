@@ -341,9 +341,9 @@ export interface AppService {
 export interface PricingExtra {
 	name: string;
 	description: string;
-	/** Starting price in PLN. Leave out to show "price agreed individually". */
+	/** Starting price in PLN. Leave out to show "Cena do ustalenia". */
 	priceFrom?: number;
-	/** Shown after the price, e.g. "/ month" */
+	/** Shown after the price, e.g. "/ mies." */
 	unit?: string;
 }
 
@@ -352,46 +352,45 @@ export const pricingPlans: PricingPlan[] = [
 	{
 		name: "Starter",
 		description:
-			"A modern one-page site or landing page. Ideal to get online fast.",
+			"Nowoczesna strona jednostronicowa lub landing page. Idealna na start.",
 		priceFrom: 300,
-		timeline: "3-7 days",
+		timeline: "3-7 dni",
 		features: [
-			"One-page design tailored to your brand",
-			"Responsive on phones, tablets and desktops",
-			"Contact form, click-to-call and Google Maps",
-			"Basic SEO and social media previews",
-			"Deployment and domain setup",
-			"3 months of free care",
+			"Projekt dopasowany do Twojej marki",
+			"Działa na telefonach, tabletach i komputerach",
+			"Formularz kontaktowy, szybkie połączenie i Mapy Google",
+			"Podstawowe SEO i podglądy w social mediach",
+			"Wdrożenie i podpięcie domeny",
+			"3 miesiące darmowej opieki",
 		],
 	},
 	{
 		name: "Business",
 		description:
-			"A multi-page site for a company or freelancer, with room to grow.",
+			"Strona z kilkoma podstronami dla firmy lub freelancera, z miejscem na rozwój.",
 		priceFrom: 600,
-		timeline: "1-2 weeks",
+		timeline: "1-2 tygodnie",
 		features: [
-			"Up to 6 subpages (offer, about, gallery, contact…)",
-			"Content editing panel (CMS) for texts and photos",
-			"Contact form, Google Maps and analytics",
-			"Technical SEO and fast PageSpeed scores",
-			"6 months of free care",
+			"Do 6 podstron (oferta, o nas, galeria, kontakt…)",
+			"Panel do samodzielnej edycji tekstów i zdjęć (CMS)",
+			"Formularz kontaktowy, Mapy Google i statystyki",
+			"Techniczne SEO i szybkie ładowanie",
+			"6 miesięcy darmowej opieki",
 		],
 		highlighted: true,
 	},
 	{
 		name: "Premium",
-		description:
-			"A fully featured site with custom functions and extra services.",
+		description: "Strona z pełną funkcjonalnością i dodatkowymi usługami.",
 		priceFrom: 1000,
-		timeline: "2-4 weeks",
+		timeline: "2-4 tygodnie",
 		features: [
-			"Unlimited subpages, blog or news section",
-			"Custom features: booking, calculators, client area",
-			"Second language version",
-			"Unlimited revisions during the project",
-			"One redesign refresh within 6 months",
-			"12 months of free care",
+			"Bez limitu podstron, blog lub aktualności",
+			"Funkcje na zamówienie: rezerwacje, kalkulatory, strefa klienta",
+			"Druga wersja językowa",
+			"Nielimitowane poprawki w trakcie projektu",
+			"Jedno odświeżenie wyglądu w ciągu 6 miesięcy",
+			"12 miesięcy darmowej opieki",
 		],
 	},
 ];
@@ -399,79 +398,81 @@ export const pricingPlans: PricingPlan[] = [
 /** Apps and custom software */
 export const appServices: AppService[] = [
 	{
-		name: "Web application",
-		description:
-			"Custom systems, dashboards and SaaS built around your process.",
+		name: "Aplikacja webowa",
+		description: "Systemy, panele i SaaS dopasowane do Twoich procesów.",
 		priceFrom: 1500,
-		timeline: "from 3 weeks",
+		timeline: "od 3 tygodni",
 		icon: "web",
 		features: [
-			"Accounts, roles and secure login (2FA)",
-			"Admin panel, tables and reports",
-			"Database and REST API",
+			"Konta, role i bezpieczne logowanie (2FA)",
+			"Panel administracyjny, tabele i raporty",
+			"Baza danych i REST API",
 		],
 	},
 	{
-		name: "Mobile app",
-		description: "One codebase for iOS and Android, built with React Native.",
+		name: "Aplikacja mobilna",
+		description: "Jedna aplikacja na iOS i Androida, w React Native.",
 		priceFrom: 3000,
-		timeline: "from 4 weeks",
+		timeline: "od 4 tygodni",
 		icon: "mobile",
 		features: [
-			"Push notifications, camera, maps, GPS",
-			"Offline mode and login with passkeys",
-			"Help with App Store and Google Play release",
+			"Powiadomienia push, aparat, mapy, GPS",
+			"Tryb offline i logowanie kluczem dostępu",
+			"Pomoc z publikacją w App Store i Google Play",
 		],
 	},
 	{
-		name: "Online store",
-		description: "A fast, custom store without monthly platform fees.",
+		name: "Sklep internetowy",
+		description:
+			"Szybki sklep na zamówienie, bez miesięcznych opłat za platformę.",
 		priceFrom: 1200,
-		timeline: "from 2 weeks",
+		timeline: "od 2 tygodni",
 		icon: "store",
 		features: [
-			"Products, cart and order management",
-			"Online payments (BLIK, Przelewy24, cards)",
-			"Courier integration (InPost, DPD)",
+			"Produkty, koszyk i obsługa zamówień",
+			"Płatności online (BLIK, Przelewy24, karty)",
+			"Integracja z kurierami (InPost, DPD)",
 		],
 	},
 	{
-		name: "Integrations & automation",
-		description: "Connect the tools you already use and stop retyping data.",
+		name: "Integracje i automatyzacje",
+		description:
+			"Połącz narzędzia, których już używasz, i przestań przepisywać dane.",
 		priceFrom: 400,
-		timeline: "from 1 week",
+		timeline: "od 1 tygodnia",
 		icon: "integration",
 		features: [
-			"Allegro, eBay, InPost, DPD and other APIs",
-			"Invoices, labels and stock sync",
-			"Scripts, bots and AI assistants",
+			"Allegro, eBay, InPost, DPD i inne API",
+			"Faktury, etykiety i synchronizacja stanów",
+			"Skrypty, boty i asystenci AI",
 		],
 	},
 ];
 
 export const pricingExtras: PricingExtra[] = [
 	{
-		name: "Care plan, monthly",
-		description: "Updates, backups, monitoring and small content changes.",
-		priceFrom: 20,
-		unit: "/ month",
-	},
-	{
-		name: "Care plan, yearly",
-		description: "The same care for a full year, at a lower price.",
-		priceFrom: 200,
-		unit: "/ year",
-	},
-	{
-		name: "Fixes & new features",
+		name: "Opieka nad stroną, miesięcznie",
 		description:
-			"Changes, fixes or new features in an existing site or app, also one not built by me.",
+			"Aktualizacje, kopie zapasowe, monitoring i drobne zmiany treści.",
+		priceFrom: 20,
+		unit: "/ mies.",
+	},
+	{
+		name: "Opieka nad stroną, rocznie",
+		description: "Ta sama opieka na cały rok, w niższej cenie.",
+		priceFrom: 200,
+		unit: "/ rok",
+	},
+	{
+		name: "Poprawki i nowe funkcje",
+		description:
+			"Zmiany, poprawki i nowe funkcje w istniejącej stronie lub aplikacji, także nie mojego autorstwa.",
 	},
 ];
 
 export const pricingNotes: string[] = [
-	"All prices are net (VAT not included) and are starting points. The final quote depends on scope and is always agreed before work starts.",
-	"Free care covers updates, security fixes and small text or photo changes.",
-	"Domain, hosting and paid third-party services are billed separately at cost.",
-	"Work is split into stages, with a deposit before the first one.",
+	"Wszystkie ceny są cenami netto i cenami startowymi. Ostateczna wycena zależy od zakresu i zawsze ustalamy ją przed rozpoczęciem prac.",
+	"Darmowa opieka obejmuje aktualizacje, poprawki bezpieczeństwa i drobne zmiany tekstów lub zdjęć.",
+	"Domena, hosting i płatne usługi zewnętrzne są rozliczane osobno, po kosztach.",
+	"Prace dzielimy na etapy, z zaliczką przed pierwszym z nich.",
 ];
